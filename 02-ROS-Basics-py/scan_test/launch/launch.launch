@@ -1,0 +1,3 @@
+<launch>
+    <node name="wall_follow" pkg="scan_test" type="wall_follow.py" output="screen"></node>
+</launch>
