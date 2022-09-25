@@ -80,3 +80,63 @@ tf.transforms.euler_from_quaternion(1,2,3,4)
 ```
 
 # Robot State Publisher
+
+## Launch file
+```xml
+<launch>
+
+  <param name="robot_description" command="cat $(find pi_robot_pkg)/urdf/pi_robot_v2.urdf" />  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find pi_robot_pkg)/config/pirobot_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/pi_robot" args="head_pan_joint_position_controller head_tilt_joint_position_controller torso_joint_position_controller
+    left_shoulder_forward_joint_position_controller right_shoulder_forward_joint_position_controller left_shoulder_up_joint_position_controller
+    right_shoulder_up_joint_position_controller left_elbow_joint_position_controller right_elbow_joint_position_controller left_wrist_joint_position_controller
+    right_wrist_joint_position_controller joint_state_controller"/>
+
+</launch>
+```
+
+## State Publisher
+- The RobotModel in Rviz was not working because the state publisher is not running, the links don't know their position relative to one another
+
+```xml
+<launch>
+
+  <param name="robot_description" command="cat $(find pi_robot_pkg)/urdf/pi_robot_v2.urdf" />  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find pi_robot_pkg)/config/pirobot_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/pi_robot" args="head_pan_joint_position_controller head_tilt_joint_position_controller torso_joint_position_controller
+    left_shoulder_forward_joint_position_controller right_shoulder_forward_joint_position_controller left_shoulder_up_joint_position_controller
+    right_shoulder_up_joint_position_controller left_elbow_joint_position_controller right_elbow_joint_position_controller left_wrist_joint_position_controller
+    right_wrist_joint_position_controller joint_state_controller"/>
+    
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/pi_robot/joint_states" />
+  </node>
+
+</launch>
+```
+## Joint State Publisher
+```xml
+<launch>
+    <param name="robot_description" command="cat $(find pi_robot_pkg)/urdf/pi_robot_v2.urdf" />
+
+    <!-- send fake joint values -->
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+
+    <!-- Combine joint values -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <!-- Show in RVIZ   -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pi_robot_pkg)/launch/pi_robot.rviz"/>
+
+</launch>
+
+```
+## Controller manager
