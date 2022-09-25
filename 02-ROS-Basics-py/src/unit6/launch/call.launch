@@ -1,0 +1,4 @@
+<launch>
+    <node name="call" pkg="unit6" type="bb8_client.py" output="screen">
+    </node>
+</launch>

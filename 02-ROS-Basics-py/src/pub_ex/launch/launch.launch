@@ -1,0 +1,4 @@
+<launch>
+    <node name="pub_vel_overwrite_name" pkg="pub_ex" type="pub_cmd_vel.py" output="screen">
+    </node>
+</launch>

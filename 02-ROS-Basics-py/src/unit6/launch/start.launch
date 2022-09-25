@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="unit6" name="move_bb8" type="bb8_server.py" output="screen">
+    </node>
+</launch>

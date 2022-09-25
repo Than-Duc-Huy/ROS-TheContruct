@@ -1,0 +1,4 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/02-ROS-Basics-py/scan_test",
+    "cmake.configureOnOpen": true
+}

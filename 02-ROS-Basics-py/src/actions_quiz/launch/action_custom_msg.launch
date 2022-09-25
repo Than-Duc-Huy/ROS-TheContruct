@@ -1,0 +1,8 @@
+<launch>
+<node
+name="server"
+pkg="actions_quiz"
+type="server.py"
+output="screen">
+</node>
+</launch>

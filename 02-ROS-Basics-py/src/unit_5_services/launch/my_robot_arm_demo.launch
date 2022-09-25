@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find iri_wam_reproduce_trajectory)/launch/start_service.launch"/>
+    <node 
+    name="serv_call"
+    pkg="unit_5_services"
+    type="exercise_5_1.py"
+    output="screen">
+    </node>
+</launch>

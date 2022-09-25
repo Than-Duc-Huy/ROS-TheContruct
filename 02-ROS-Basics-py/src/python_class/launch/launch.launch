@@ -1,0 +1,8 @@
+<launch>
+<node
+    pkg="python_class"
+    name="server"
+    type="bb8_service_server.py"
+    output="screen">
+</node>
+</launch>
