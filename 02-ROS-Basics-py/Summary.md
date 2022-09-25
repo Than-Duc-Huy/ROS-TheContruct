@@ -102,7 +102,9 @@ generate_messages(
 catkin_package(
       CATKIN_DEPENDS rospy message_runtime   # This will NOT be the only thing here
 )
+```
 #### Package.xml
+
 ```xml
 <build_depend>message_generation</build_depend> 
 <build_export_depend>message_runtime</build_export_depend>
@@ -115,9 +117,51 @@ catkin_package(
 rosmsg list | grep Custom #Find the msg
 rosmsg info Custom
 ```
+
+##### Don't name the python file as the same name of the pacakge
+- Because the way python work, it will not find the .py file to import
 # ROS Services
+- Service is synchronous
+- Action is asynchronous
+## Client
+```bash
+rosservice call <service> #TAB TAB to autofill the parameter structure
+rosservice list | grep <service> # Check full service name
+rosservice info <service> # get the info of the service
+
+    #Node: It states the node that provides (has created) that service.
+    #Type: It refers to the kind of message used by this service. It has the same structure as topics do. It's always made of package_where_the_service_message_is_defined / Name_of_the_File_where_Service_message_is_defined.
+    #Args: Here you can find the arguments that this service takes when called.
+
+rossrv show <Type_of_service> #The message 
+```
+
+- Example Python code
+```python
+from trajectory_by_name_srv.srv import TrajByName, TrajByNameRequest # Get the service type:
+
+#trajectory_by_name_srv is a package
+#trajcetory_by_name_srv.srv is a folder srv inside the package
+#TrajByName.srv defines the structure 
+    #After compile: TrajByNameRequest, TrajByNameResponse, TrajByName (itself)
+
+rospy.init_node('service_client')
+# Wait for the service client /trajectory_by_name to be running
+rospy.wait_for_service('/trajectory_by_name')
+traj_by_name_service = rospy.ServiceProxy('/trajectory_by_name', TrajByName)
+#Create a request
+traj_by_name_object = TrajByNameRequest()
+#Attribute is based on the definition in .srv message type
+traj_by_name_object.traj_name = "release_food"
+# Pass the Request into the Proxy
+result = traj_by_name_service(traj_by_name_object)
+```
+### Include a launch in .launch
+```
+<include file="$(find package_with_the_launch_file)/launch/launch.launch>
+```
+
 ## Server 
-## Cliet
 
 # Python Classes
 ## Server
