@@ -1,0 +1,34 @@
+<launch>
+<!--load the robot description and param-->
+<param name="robot_description" command="cat $(find tf_exercises_pkg)/urdf/pi_robot_v2.urdf"/>
+<rosparam file="$(find tf_exercises_pkg)/config/pirobot_control.yaml" command="load"/>
+
+<!--Joint state publisher-->
+<node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui">
+<remap from="/joint_states" to="/pi_robot/joint_states"/>
+</node>
+
+<!--load the controller-->
+<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/pi_robot" 
+args="  head_pan_joint_position_controller
+head_tilt_joint_position_controller
+torso_joint_position_controller 
+left_shoulder_forward_joint_position_controller
+right_shoulder_forward_joint_position_controller
+left_shoulder_up_joint_position_controller
+right_shoulder_up_joint_position_controller
+left_elbow_joint_position_controller
+right_elbow_joint_position_controller
+left_wrist_joint_position_controller
+right_wrist_joint_position_controller
+joint_state_controller"/>
+
+<!--joint state to tf transform-->
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/pi_robot/joint_states"/>
+</node>
+
+<!--Rviz-->
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find pi_robot_pkg)/launch/pi_robot.rviz"/>
+
+</launch>

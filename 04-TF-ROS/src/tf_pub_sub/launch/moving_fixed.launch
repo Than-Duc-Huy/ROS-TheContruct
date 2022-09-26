@@ -1,0 +1,15 @@
+<launch>
+<node
+pkg="tf_pub_sub"
+name="move"
+type="moving_extra_frame_pub.py"
+output="screen">
+</node>
+
+<node
+pkg="tf_pub_sub"
+name="fixed"
+type="fixed_extra_frame_pub.py"
+output="screen">
+</node>
+</launch>

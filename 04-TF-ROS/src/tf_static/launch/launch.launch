@@ -1,0 +1,8 @@
+<launch>
+<node pkg="tf" type="static_transform_publisher" name="node1"
+args=" 0 0 0 0 0 0 box_bot_1/odom box_bot_2/odom  100"/>
+<node pkg="tf" type="static_transform_publisher" name="node2"
+args=" 0 0 0 0 0 0 box_bot_2/odom box_bot_3/odom  100 "/>
+
+<node pkg="rviz" type="rviz" name="rviz"/>
+</launch>
