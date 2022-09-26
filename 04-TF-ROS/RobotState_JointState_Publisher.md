@@ -136,7 +136,7 @@ pi_robot:  #Name space /pi_robot
 ```
 
 
-#### GUI
+#### RQT GUI
 ```bash
 rosrun rqt_gui rqt_gui
 ```
@@ -144,7 +144,7 @@ rosrun rqt_gui rqt_gui
 - Control topic `/pi_robot/torso_joint_position_controller/command` (where does this topics initiated? is it a tf node?)
     - How are the topics organize? What file, what definition gives rise to them?
 
-## Exercise
+# Exercise
 - Be careful of typos : `<remap from="/joint_states" to="/pi_robot/joint_states"/>`
 
 - Controlller manager will give 4 topics per controller
@@ -156,3 +156,5 @@ rosrun rqt_gui rqt_gui
 - When there is a controller (`controller_manager`), you don't need the `joint_state_publisher`
     - Because `controller_manager`(gazebo) is joint_state publishing
     - Real robot with encoders can use some other type of node to do joint_state publishing
+
+- `robot_state_publisher` starts and publishing the `/tf` topics?
