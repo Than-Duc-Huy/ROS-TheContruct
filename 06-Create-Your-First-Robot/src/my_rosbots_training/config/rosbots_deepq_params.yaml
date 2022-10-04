@@ -1,0 +1,42 @@
+rosbots: #namespace
+
+    #qlearn parameters
+
+    alpha: 0.01 # Learning Rate
+    alpha_decay: 0.01
+    gamma: 1.0 # future rewards value 0 none 1 a lot
+    epsilon: 1.0 # exploration, 0 none 1 a lot
+    epsilon_decay: 0.995 # how we reduse the exploration
+    epsilon_min: 0.01 # minimum value that epsilon can have
+    batch_size: 64 # maximum size of the batches sampled from memory
+    episodes_training: 1000
+    n_win_ticks: 250 # If the mean of rewards is bigger than this and have passed min_episodes, the task is considered finished
+    min_episodes: 100
+    #max_env_steps: None
+    monitor: True # stores results of openai gym in a file
+    quiet: False # Used to show messages on screen
+
+
+    # Follow the line Task Environment Related parameters
+    number_decimals_precision_obs: 4
+    speed_step: 1.0 # Time to wait in the reset phases
+
+    linear_forward_speed: 1.5 # Spawned for going forwards
+    linear_turn_speed: 0.1 # Linear speed when turning
+    angular_speed: 0.45 # Angular speed when turning Left or Right
+    init_linear_forward_speed: 0.0 # Initial linear speed in which we start each episode
+    init_linear_turn_speed: 0.0 # Initial angular speed in shich we start each episode
+
+    n_observations: 19200 # (80, 80, 3) # Number of pixels used as observations
+    n_actions: 3 # Number of actions used by algorithm and task
+
+    # How many meters ahead camera-stream readings we use for detection, the smaller the less faster processing
+    look_ahead_distance: 100
+    cur_lane_offset: 1.51
+    max_lane_offset: 1.5 # Value considered max, extreme side of lane relative to the center. Cx = 320 = width cam
+    safe_lane_offset: -1.5 # Value considered nominal, around lane center. Cx = 0 => Its on the max left side
+
+    follow_lane_reward: 5 # Points Given to go follow lane
+    left_right_reward: 2.5 # Points given when a turn action is taken
+    veer_off_reward: -10
+    end_episode_points: 200 # Points given when ending an episode

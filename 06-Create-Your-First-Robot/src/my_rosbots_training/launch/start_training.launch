@@ -1,0 +1,5 @@
+<launch>
+    <rosparam command="load" file="$(find my_rosbots_training)/config/rosbots_deepq_params.yaml" />
+    <!-- Launch the training system -->
+    <node pkg="my_rosbots_training" name="rosbots_n1try_algorithm" type="start_training.py" output="screen"/> -->
+</launch>
