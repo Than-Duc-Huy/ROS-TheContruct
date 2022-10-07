@@ -1,0 +1,19 @@
+<launch>
+
+ <arg name="width" default="80" />
+ <arg name="height" default="80" />
+
+ <arg name="camera_info" default="/robot1/camera1/camera_info" />
+ <arg name="camera_topic" default="/robot1/camera1/image_raw" />
+
+ <arg name="undistord" default="true"/>
+ 
+ <node name="ros_imresize" pkg="ros_imresize" type="ros_imresize" output="screen">
+  <param name="camera_info" value="$(arg camera_info)" />
+  <param name="topic_crop" value="$(arg camera_topic)" />
+  <param name="resize_width" value="$(arg width)" />
+  <param name="resize_height" value="$(arg height)" />
+  <param name="undistord" value="$(arg undistord)" />
+ </node>
+
+</launch>
