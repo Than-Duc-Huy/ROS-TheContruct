@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/user/catkin_ws/src/fetch.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/fetch.srdf
+  CONFIG:
+    author_name: huy
+    author_email: huy@gmai.com
+    generated_timestamp: 1665119581

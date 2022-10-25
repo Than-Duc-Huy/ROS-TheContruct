@@ -1,0 +1,9 @@
+<launch>
+
+    <!-- <arg name= default=/> -->
+    <node
+    name="motion"
+    pkg="my_motion_scripts"
+    type="motion.py">
+    </node>
+</launch>
